@@ -1,0 +1,175 @@
+openapi: 3.0.3
+info:
+  title: CRUD APIs
+  description: Rest APIs for CRUD operations on profile.
+  version: 1.0.0
+components:
+  schemas:
+    responseSchema:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        type:
+          type: string
+        checked:
+          type: boolean
+        age:
+          type: number
+          format: float
+        description:
+          type: string
+        date:
+          type: string
+          format: date-time
+   
+paths:
+  /profile:
+    description: Create profile and get all the profiles
+    
+    post:
+      description: Creates a new profile with given data.
+      operationId: app.api.createProfile
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - checked
+                - type
+                - age
+                - date
+              properties:
+                name:
+                  type: string
+                checked:
+                  type: boolean
+                type:
+                  type: string
+                age:
+                  type: number
+                  format: float
+                  minimum: 0
+                description:
+                  type: string
+                date:
+                  type: string
+                  format: date-time
+            example:
+              name: Shashi
+              checked: true
+              type: programmer
+              age: 22
+              description: Expertise in python, django and rest framework.
+              date: '2022-03-10T08:23:23.52Z'
+        required: true
+      responses:
+        200:
+          description: Profile Creation Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/responseSchema'
+        405:
+          description: Method Not allowed
+        406:
+          description: Not Acceptable
+        default:
+          description: Unexpected Error Ocurred
+          
+    get:
+      description: List all the profiles of the data base
+      operationId: app.api.listProfiles
+      responses:
+        200:
+          description: Profile Creation Response
+          content:
+            application/json:
+              schema:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/responseSchema'
+        404:
+          description: Details not found
+        default:
+          description: Unexpected Error Occured
+  /profile/{id}:
+    description: Get, update and delete profile by id.
+    parameters:
+    - name: id
+      in: path
+      required: true
+      description: id of the profile on which operation has to performed.
+      schema:
+        type: integer
+    get:
+      description: Get Profile using id.
+      operationId: app.api.retrieveProfile
+      responses:
+        200:
+          description: Required Profile
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/responseSchema'
+        404:
+          description: Details not found
+        default:
+          description: Unexpected Error Occured
+    put:
+      description: Update Profile using id.
+      operationId: app.api.updateProfile
+      responses:
+        200:
+          description: Updated Profile Data
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/responseSchema'
+        404:
+          description: Details not found
+        default:
+          description: Unexpected Error Occured
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                checked:
+                  type: boolean
+                type:
+                  type: string
+                age:
+                  type: number
+                  format: float
+                  minimum: 0
+                description:
+                  type: string
+                date:
+                  type: string
+                  format: date-time
+            example:
+              name: Shashi
+              checked: true
+              type: programmer
+              age: 22
+              description: Expertise in python, django and rest framework.
+              date: '2022-03-10T08:23:23.52Z'
+    delete:
+      description: Get Profile using id.
+      operationId: app.api.deleteProfile
+      responses:
+        200:
+          description: Profile Deleted
+        404:
+          description: Details not found
+        default:
+          description: Unexpected Error Occured
