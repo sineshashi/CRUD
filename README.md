@@ -25,6 +25,9 @@ Guide for using repository:
     After cloning the repository.
     Create virtual environment using following command:
         python -m venv env
+       
+    Activate environment using:
+        ./env/Scripts/activate
     
     Install all the required packages and dependencies using command:
         pip install requirements.txt
