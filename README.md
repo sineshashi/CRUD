@@ -20,7 +20,7 @@ This project is the solution to the following problem:
             Date: Datetime
 
 
-Guide for using repository:
+Guide for using repository (windows):
 
     After cloning the repository.
     Create virtual environment using following command:
@@ -44,7 +44,7 @@ Guide for using repository:
 Usage of different modules and packages:
 
     1) OpenAPI Specification:
-        This is a method of creating Open API documentation by creating a .json or .yaml file.
+        This is a way of creating Open API documentation by creating a .json or .yaml file.
         In this project, a file named openapi.yaml has been created which consists of the details and specifications of APIs created in the project.
 
     2) Connexion: 
