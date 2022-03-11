@@ -22,7 +22,7 @@ This project is the solution to the following problem:
 
 Guide for using repository (windows):
 
-    After cloning the repository.
+    After cloning the repository and going into the directory ./CRUD,
     Create virtual environment using following command:
         python -m venv env
        
