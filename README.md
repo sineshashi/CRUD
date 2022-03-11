@@ -26,6 +26,9 @@ Guide for using repository:
     Create virtual environment using following command:
         python -m venv env
     
+    Install all the required packages and dependencies using command:
+        pip install requirements.txt
+
     Now go to Project directory using cd ./Project and migrate using the command:
         python migrate.py 
             This command will create table in the database. Here sqlite is set default. 
