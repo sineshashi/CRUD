@@ -1,4 +1,3 @@
-from unicodedata import numeric
 from sqlalchemy import Column, Numeric, String, Integer, Boolean, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
