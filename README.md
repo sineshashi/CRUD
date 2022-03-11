@@ -30,7 +30,7 @@ Guide for using repository (windows):
         ./env/Scripts/activate
     
     Install all the required packages and dependencies using command:
-        pip install requirements.txt
+        pip install -r requirements.txt
 
     Now go to Project directory using cd ./Project and migrate using the command:
         python migrate.py 
