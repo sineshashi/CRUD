@@ -1,12 +1,9 @@
-from tkinter import N
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.models import Base
 import connexion
 from connexion.resolver import RestyResolver
 from subprocess import run
-from app import test_api
-
 
 
 engine = create_engine('sqlite:///db.sqlite')
@@ -42,7 +39,7 @@ if __name__ == "__main__":
     import sys
     if sys.argv[1] == 'runserver':
         runserver()
-        
+
     if sys.argv[1] == 'migrate':
         migrate()
 
@@ -59,7 +56,7 @@ if __name__ == "__main__":
         run('pytest ./app/test_api.py::test_listProfile')
 
     if sys.argv[1] == 'testretrieve':
-        run('pytest ./app/test_api.py::test_retrieveProfile')
+        run('pytest ./app/test_api.py::test_retrieveProfile', id)
 
 
     if sys.argv[1] == 'testput':
