@@ -22,7 +22,7 @@ This project is the solution to the following problem:
 
 Guide for using repository (windows):
 
-    After cloning the repository.
+    After cloning the repository and going into the directory ./CRUD,
     Create virtual environment using following command:
         python -m venv env
        
@@ -30,7 +30,7 @@ Guide for using repository (windows):
         ./env/Scripts/activate
     
     Install all the required packages and dependencies using command:
-        pip install requirements.txt
+        pip install -r requirements.txt
 
     Now go to Project directory using cd ./Project and migrate using the command:
         python manage.py migrate
