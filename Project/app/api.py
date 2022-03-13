@@ -88,5 +88,5 @@ def deleteProfile(id):
             session.commit()
             return f"Profile with id {id} has been deleted.", 200
         else: #If there is no profile with provided id raise error.
-            return "No such profile exists for this id.", 404
+            return "No such profile found for this id.", 404
 

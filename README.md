@@ -33,12 +33,22 @@ Guide for using repository (windows):
         pip install requirements.txt
 
     Now go to Project directory using cd ./Project and migrate using the command:
-        python migrate.py 
+        python manage.py migrate
             This command will create table in the database. Here sqlite is set default. 
 
     Now start the server using following command:
-        python startserver.py
+        python manage.py runserver
 
+    Other commands:
+    python manage.py {
+        'runtests: To run all the tests at once \n'
+        'testpost: Tests post method with the default data \n'
+        'testlist: Tests the list method \n'
+        'testretrieve: Test the retrieve method \n'
+        'testdelete: Tests the delete method \n'
+        'testput: Tests the update method.'
+    )
+    }
     base_url/ui more specifically for default connexion server http://192.168.43.46:8080/ui/ will show swagger specification where all the info about APIs can be obtained.
 
 Usage of different modules and packages:
@@ -49,11 +59,11 @@ Usage of different modules and packages:
 
     2) Connexion: 
         This is a webframework which gaurantees the mapping of urls mentioned in the open api specification with the corresponding python functions or classes.
-        In this prject, a file named startserver.py has been created which maps the APIs with the functions of api.py file created in app folder, and starts a default flask server for us too.
+        In this prject, a file named manage.py has been created, which has a function runserver() which maps the APIs with the functions of api.py file created in app folder, and starts a default flask server for us too.
     
     3) SQLAlchemy:
         This is a package which provides a Object Relational Mapper to interact with the database. Using this orm, we can create tables and manipulate data of the table.
-        In this project, models.py file in app folder, has the required model created by using sqlalchemy. The file migrate.py when executed creates the table of this model in the database. Since SQLAlchemy works on the sessions so a file db.py in app folder, has been created which has all the code to connect with the data base.
+        In this project, models.py file in app folder, has the required model created by using sqlalchemy. The file manage.py has a function migrate() when executed creates the table of this model in the database. Since SQLAlchemy works on the sessions so a file db.py in app folder, has been created which has all the code to connect with the data base.
         Whenever we need to connect with database we import session from db.py file and start the session.
         This package has been used as ORM so api.py file which handles requests, also uses this to fetch, insert or maniulate data of database.
 

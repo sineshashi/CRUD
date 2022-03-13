@@ -1,7 +1,6 @@
 import requests
 import json
-
-
+    
 
 def main_url():
     return "http://192.168.43.46:8080/"
@@ -41,24 +40,30 @@ def test_postProfile(): #Test the post request for profile.
 
 
 def test_retrieveProfile(): #Test get request with id.
-    id = 2 #Change id to perform test for different IDs.
+    id =  1
     url = main_url() + f"profile/{id}"
     response = requests.get(url)
-    assert response.status_code == 200, "Status code does not match."
+    assert response.status_code == 200 or response.status_code == 404, "Status code does not match."
+    if response.status_code == 404:
+        assert response.text == "No such profile found for this id.", "Some other error occured."
+        print("No profile for this id.")
     response_data = json.loads(response.text)
     assert response_data['age'] >= 0, "Invalid age found."
 
 
 
 def test_updateProfile(): # Test Put request with id.
-    id = 2 #Change id to perform test for different IDs.
+    id = 1
     url = main_url() + f"profile/{id}"
     request_data = {
         "name": "Ram",
         "age": 20
     }
     response = requests.put(url, json=request_data)
-    assert response.status_code == 200, "Status do not match."
+    assert response.status_code == 200 or response.status_code == 404, "Status code does not match."
+    if response.status_code == 404:
+        assert response.text == "No such profile found for this id.", "Some other error occured."
+        print("No profile for this id.")
     response_data = json.loads(response.text)
     reqeusted_fields = list(request_data.keys())
     for field in reqeusted_fields: #Checking whether each field of requested data has been updated or not.
@@ -66,10 +71,13 @@ def test_updateProfile(): # Test Put request with id.
 
 
 def test_deleteProfile(): #Test delete request with id.
-    id = 2 #Change id to perform test for another id.
+    id = 1
     url = main_url() + f"profile/{id}"
     response = requests.delete(url)
-    assert response.status_code == 200, "Status code does not match."
+    assert response.status_code == 200 or response.status_code == 404, "Status code does not match."
+    if response.status_code == 404:
+        assert response.text == "No such profile found for this id.", "Some other error occured."
+        print("No profile for this id.")
     response_data = json.loads(response.text)
     assert response_data == f"Profile with id {id} has been deleted.", "No deleted response."
 
