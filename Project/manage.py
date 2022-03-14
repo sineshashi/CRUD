@@ -39,9 +39,10 @@ def help():
 if __name__ == "__main__":
     import sys
     if sys.argv[1] == 'runserver':
-        if sys.argv[2] == '--debug':
-            runserver(debug = True)
-        else:
+        try:
+            if sys.argv[2] == '--debug':
+                runserver(debug = True)
+        except:
             runserver()
 
 
@@ -52,13 +53,13 @@ if __name__ == "__main__":
         help()
 
     if sys.argv[1] == 'runtests':
-        run('pytest ./app/test_api.py::test_all')
+        run('pytest -q -s --id 0 ./app/test_api.py::test_all') #Here id will mean nothing because we will override it in the test_all() func.
 
     if sys.argv[1] == 'testpost':
-        run('pytest ./app/test_api.py::test_postProfile')
+        run('pytest -q -s --id 0 ./app/test_api.py::test_postProfile') #In post id means nothing but to avoid parameter errors it is being passed here.
 
     if sys.argv[1] == 'testlist':
-        run('pytest ./app/test_api.py::test_listProfile')
+        run('pytest -q -s --id 0 ./app/test_api.py::test_listProfile') #id is being passed to avoid parameter errors because of conftest.py file.
 
     if sys.argv[1] == 'testretrieve':
         print('Please enter the id')
