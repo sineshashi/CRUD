@@ -41,6 +41,7 @@ Guide for using repository (windows):
 
     Other commands:
     python manage.py {
+        'runserver --debug : To run server in debug mode. \n'
         'runtests: To run all the tests at once \n'
         'testpost: Tests post method with the default data \n'
         'testlist: Tests the list method \n'
