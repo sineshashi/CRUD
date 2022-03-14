@@ -15,8 +15,8 @@ def migrate():
     with session:
         Base.metadata.create_all(engine)
 
-def runserver():
-    app = connexion.App(__name__, specification_dir = './', options={"swagger_ui": True})
+def runserver(debug=False):
+    app = connexion.App(__name__, specification_dir = './', debug = debug, options={"swagger_ui": True})
     app.add_api('openapi.yaml', resolver = RestyResolver('app.api'))
     app.run(port=8080)
 
@@ -27,6 +27,7 @@ def help():
         'These are the valid commands \n' 
         'migrate: To migrate the created models to database. \n'
         'runserver: To runserver. \n'
+        'runserver --debug : To run server in debug mode. \n'
         'runtests: To run all the tests at once \n'
         'testpost: Tests post method with the default data \n'
         'testlist: Tests the list method \n'
@@ -38,7 +39,11 @@ def help():
 if __name__ == "__main__":
     import sys
     if sys.argv[1] == 'runserver':
-        runserver()
+        if sys.argv[2] == '--debug':
+            runserver(debug = True)
+        else:
+            runserver()
+
 
     if sys.argv[1] == 'migrate':
         migrate()
@@ -47,7 +52,7 @@ if __name__ == "__main__":
         help()
 
     if sys.argv[1] == 'runtests':
-        run('pytest')
+        run('pytest ./app/test_api.py::test_all')
 
     if sys.argv[1] == 'testpost':
         run('pytest ./app/test_api.py::test_postProfile')
@@ -56,13 +61,19 @@ if __name__ == "__main__":
         run('pytest ./app/test_api.py::test_listProfile')
 
     if sys.argv[1] == 'testretrieve':
-        run('pytest ./app/test_api.py::test_retrieveProfile', id)
+        print('Please enter the id')
+        id = input()
+        run(f'pytest -q -s --id {id} ./app/test_api.py::test_retrieveProfile')
 
 
     if sys.argv[1] == 'testput':
-        run('pytest ./app/test_api.py::test_updateProfile')
+        print('Please enter the id')
+        id = input()
+        run(f'pytest -q -s --id {id} ./app/test_api.py::test_updateProfile')
 
 
     if sys.argv[1] == 'testdelete':
-        run('pytest ./app/test_api.py::test_deleteProfile')
+        print('Please enter the id')
+        id = input()
+        run(f'pytest -q -s --id {id} ./app/test_api.py::test_deleteProfile')
         
